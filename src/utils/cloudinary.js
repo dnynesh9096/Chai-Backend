@@ -18,11 +18,7 @@ export const uploadOnCloudinary = async (filePath) => {
 
     try {
         const uploadResult = await cloudinary.uploader.upload(filePath, {
-            resource_type: "image",
-            folder: "chaior/users",
-            transformation: [
-                { width: 800, height: 800, crop: "fill" }
-            ],
+            resource_type: "auto",
         });
 
         // File uploaded successfully, remove local file
@@ -32,7 +28,7 @@ export const uploadOnCloudinary = async (filePath) => {
             console.log("Error deleting local file after upload:", error);
         }
 
-        return uploadResult.secure_url;
+        return uploadResult;
     } catch (err) {
         // Remove local file if upload failed
         try {
